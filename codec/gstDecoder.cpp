@@ -320,7 +320,7 @@ bool gstDecoder::discover()
 
 	// create a new discovery interface
 	GError* err = NULL;
-	GstDiscoverer* discoverer = gst_discoverer_new(5 * GST_SECOND, &err);
+	GstDiscoverer* discoverer = gst_discoverer_new(GST_SECOND, &err);
 	
 	if( !discoverer )
 	{
@@ -525,7 +525,7 @@ bool gstDecoder::buildLaunchStr()
 	else if( uri.protocol == "rtsp" )
 	{
 		ss << "rtspsrc location=" << uri.string;
-		ss << " latency=" << mOptions.rtspLatency;
+		//ss << " latency=200 drop-on-latency=true";
 		ss << " ! queue ! ";
 		
 		if( mOptions.codec == videoOptions::CODEC_H264 )

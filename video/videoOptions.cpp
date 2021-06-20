@@ -35,7 +35,6 @@ videoOptions::videoOptions()
 	bitRate     = 0;
 	numBuffers  = 4;
 	loop        = 0;
-	rtspLatency = 2000;
 	zeroCopy    = true;
 	ioType      = INPUT;
 	deviceType  = DEVICE_DEFAULT;
@@ -68,7 +67,6 @@ void videoOptions::Print( const char* prefix ) const
 	LogInfo("  -- zeroCopy:   %s\n", zeroCopy ? "true" : "false");	
 	LogInfo("  -- flipMethod: %s\n", FlipMethodToStr(flipMethod));
 	LogInfo("  -- loop:       %i\n", loop);
-	LogInfo("  -- rtspLatency %i\n", rtspLatency);
 	
 	LogInfo("------------------------------------------------\n");
 }
@@ -161,9 +159,6 @@ bool videoOptions::Parse( const char* URI, const commandLine& cmdLine, videoOpti
 		if( loop == -999 )
 			loop = cmdLine.GetInt("loop");
 	}
-
-	// RTSP latency
-	rtspLatency = cmdLine.GetUnsignedInt("input-rtsp-latency", rtspLatency);
 	
 	return true;
 }
